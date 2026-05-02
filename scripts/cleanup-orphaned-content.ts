@@ -46,7 +46,11 @@ async function fetchRoadmapJson(slug: string): Promise<{ nodes: Node[] }> {
     console.log(`  API fetch failed for ${slug}, falling back to local JSON`);
     const localPath = path.join(ROADMAP_CONTENT_DIR, slug, `${slug}.json`);
     const raw = await fs.readFile(localPath, 'utf-8');
-    return JSON.parse(raw);
+    try {
+      return JSON.parse(raw);
+    } catch (parseErr) {
+      throw new Error(`Failed to parse local JSON for ${slug}: ${parseErr}`);
+    }
   }
 }
 
