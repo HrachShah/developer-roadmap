@@ -61,7 +61,12 @@ const COMPRESS_CONFIG = {
 
   if (isCacheFileExists) {
     const cacheFileContent = await fs.readFile(cacheFile, 'utf8');
-    cache = JSON.parse(cacheFileContent);
+    try {
+      cache = JSON.parse(cacheFileContent);
+    } catch (err) {
+      console.error(`Failed to parse cache file ${cacheFile}: ${err}. Starting with empty cache.`);
+      cache = [];
+    }
   }
 
   const images = await recursiveGetImages(publicDir);
