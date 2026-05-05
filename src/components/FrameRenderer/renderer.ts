@@ -80,6 +80,9 @@ export class Renderer {
 
     return fetch(jsonUrl)
       .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to load ${jsonUrl}: ${res.status} ${res.statusText}`);
+        }
         return res.json();
       })
       .then((json) => {
