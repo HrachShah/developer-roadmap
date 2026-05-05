@@ -29,9 +29,18 @@ export async function getDiscordInfo(): Promise<{
   const response = await fetch(
     'https://discord.com/api/v9/invites/cJpEt5Qbwa?with_counts=true',
   );
+  if (!response.ok) {
+    discordStats = {
+      url: `https://roadmap.sh/discord`,
+      total: 17000,
+      totalFormatted: '17k',
+      online: 0,
+      onlineFormatted: formatter.format(0),
+    };
+    return discordStats;
+  }
   try {
     const json: any = await response.json();
-
     discordStats = {
       url: `https://discord.gg/${json.code}`,
       total: json.approximate_member_count,
