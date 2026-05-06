@@ -71,9 +71,17 @@ export async function readChatStream(
 
         switch (prefix) {
           case CHAT_RESPONSE_PREFIX.message:
-            return { type: 'message', content: JSON.parse(content) };
+            try {
+              return { type: 'message', content: JSON.parse(content) };
+            } catch {
+              throw new Error('Failed to parse message content: ' + content);
+            }
           case CHAT_RESPONSE_PREFIX.details:
-            return { type: 'details', content: JSON.parse(content) };
+            try {
+              return { type: 'details', content: JSON.parse(content) };
+            } catch {
+              throw new Error('Failed to parse details content: ' + content);
+            }
           default:
             throw new Error('Invalid prefix: ' + prefix);
         }
