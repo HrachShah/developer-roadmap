@@ -82,9 +82,17 @@ export async function readDataStream<D extends Record<string, unknown>>(
 
         switch (prefix) {
           case CHAT_RESPONSE_PREFIX.message:
-            return { type: 'text', content: JSON.parse(content) };
+            try {
+              return { type: 'text', content: JSON.parse(content) };
+            } catch {
+              throw new Error('Failed to parse message content as JSON: ' + content);
+            }
           case CHAT_RESPONSE_PREFIX.details:
-            return { type: 'details', data: JSON.parse(content) };
+            try {
+              return { type: 'details', data: JSON.parse(content) };
+            } catch {
+              throw new Error('Failed to parse details content as JSON: ' + content);
+            }
           default:
             throw new Error('Invalid prefix: ' + prefix);
         }
