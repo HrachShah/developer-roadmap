@@ -29,6 +29,7 @@ import {
   renderTopicProgress,
   updateResourceProgress as updateResourceProgressApi,
 } from '../../lib/resource-progress';
+import type { AllowedLinkTypes } from '../CustomRoadmap/CustomRoadmap.tsx';
 import { type AllowedRoadmapRenderer } from '../../lib/roadmap.ts';
 import { aiLimitOptions } from '../../queries/ai-course.ts';
 import { billingDetailsOptions } from '../../queries/billing.ts';
@@ -730,7 +731,7 @@ export function TopicDetail(props: TopicDetailProps) {
                             <li key={resource._id}>
                               <TopicDetailLink
                                 url={resource.url}
-                                type={resource.type as any}
+                                type={resource.type as AllowedLinkTypes | string}
                                 title={resource.title}
                                 isPaid={true}
                               />
