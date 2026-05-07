@@ -84,7 +84,8 @@ export function getCourseFineTuneData(
 
   try {
     return JSON.parse(meta);
-  } catch {
+  } catch (err) {
+    // Malformed JSON in storage, treat as null
     return null;
   }
 }

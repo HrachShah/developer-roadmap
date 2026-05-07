@@ -19,7 +19,8 @@ export function getQuestionAnswerChatMessages(sessionId: string) {
 
   try {
     return JSON.parse(messages);
-  } catch {
+  } catch (err) {
+    // Malformed JSON in storage, treat as empty
     return [];
   }
 }

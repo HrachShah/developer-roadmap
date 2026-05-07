@@ -108,7 +108,8 @@ export function getStoredUtmParams(): UtmParams {
 
   try {
     return JSON.parse(utmParams);
-  } catch {
+  } catch (err) {
+    // Malformed UTM params in URL, treat as empty
     return {};
   }
 }
