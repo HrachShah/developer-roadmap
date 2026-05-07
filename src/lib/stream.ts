@@ -83,13 +83,13 @@ export async function readDataStream<D extends Record<string, unknown>>(
           case CHAT_RESPONSE_PREFIX.message:
             try {
               return { type: 'text', content: JSON.parse(content) };
-            } catch {
+            } catch (err) {
               throw new Error('Failed to parse text content: ' + content);
             }
           case CHAT_RESPONSE_PREFIX.details:
             try {
               return { type: 'details', data: JSON.parse(content) };
-            } catch {
+            } catch (err) {
               throw new Error('Failed to parse details content: ' + content);
             }
           default:
