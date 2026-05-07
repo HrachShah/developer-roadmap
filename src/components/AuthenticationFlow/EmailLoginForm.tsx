@@ -83,7 +83,7 @@ export function EmailLoginForm(props: EmailLoginFormProps) {
         className="block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-xs outline-hidden placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
         placeholder="Email Address"
         value={email}
-        onInput={(e) => setEmail(String((e.target as any).value))}
+        onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
       />
       <label htmlFor={passwordFieldId} className="sr-only">
         Password
@@ -97,7 +97,7 @@ export function EmailLoginForm(props: EmailLoginFormProps) {
         className="mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-xs outline-hidden placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
         placeholder="Password"
         value={password}
-        onInput={(e) => setPassword(String((e.target as any).value))}
+        onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
       />
 
       <p className="mt-2 mb-3 text-sm text-gray-500">
