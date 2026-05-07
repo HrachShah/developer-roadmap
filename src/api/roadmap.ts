@@ -54,13 +54,13 @@ export async function getProjectList() {
     return [];
   });
 
-  const pagesJson = await (pages as any).json();
-  const projects: ProjectPageType[] = pagesJson
-    .filter((page: any) => page?.group?.toLowerCase() === 'projects')
-    .map((page: any) => ({
-      id: page.id,
-      title: page.title,
-      url: page.url,
+  const pagesJson = await (pages as Response).json();
+  const projects: ProjectPageType[] = (pagesJson as Array<Record<string, unknown>>)
+    .filter((page) => page?.group?.toLowerCase() === 'projects')
+    .map((page) => ({
+      id: page.id as string,
+      title: page.title as string,
+      url: page.url as string,
     }));
 
   return projects;
