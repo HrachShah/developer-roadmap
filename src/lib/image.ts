@@ -5,8 +5,8 @@ export async function getLocalImageDimensions(path: string) {
   try {
     const imageBuffer = await readFile(path);
     return imageSize(imageBuffer);
-  } catch (error) {
-    console.error(error, (error as Error)?.stack);
+  } catch (error: Error) {
+    console.error(error, error.stack);
     return null;
   }
 }
