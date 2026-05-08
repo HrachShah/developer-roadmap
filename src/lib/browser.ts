@@ -101,17 +101,13 @@ export function getStoredUtmParams(): UtmParams {
   if (typeof window === 'undefined') {
     return {};
   }
+
   const utmParams = localStorage.getItem('utm_params');
   if (!utmParams) {
     return {};
   }
 
-  try {
-    return JSON.parse(utmParams);
-  } catch (err) {
-    // Malformed UTM params in URL, treat as empty
-    return {};
-  }
+  return JSON.parse(utmParams);
 }
 
 export function getUrlParams() {

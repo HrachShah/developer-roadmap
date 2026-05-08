@@ -50,11 +50,13 @@ export async function getProjectList() {
     ? 'http://localhost:3000'
     : 'https://roadmap.sh';
   const pages = await fetch(`${baseUrl}/pages.json`).catch((err) => {
-    console.error(err);
-    return [];
+    console.error('Failed to fetch project list:', err);
+    return null;
   });
 
-  const pagesJson = await (pages as any).json();
+  if (!pages) return [];
+
+  const pagesJson = await pages.json();
   const projects: ProjectPageType[] = pagesJson
     .filter((page: any) => page?.group?.toLowerCase() === 'projects')
     .map((page: any) => ({

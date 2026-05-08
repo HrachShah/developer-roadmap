@@ -82,12 +82,7 @@ export function getCourseFineTuneData(
     return null;
   }
 
-  try {
-    return JSON.parse(meta);
-  } catch (err) {
-    // Malformed JSON in storage, treat as null
-    return null;
-  }
+  return JSON.parse(meta);
 }
 
 export function getLastSessionId(): string | null {

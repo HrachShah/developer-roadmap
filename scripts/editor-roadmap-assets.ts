@@ -13,19 +13,15 @@ if (!roadmapId) {
 const apiUrl = `https://roadmap.sh/api/v1-official-roadmap/${roadmapId}`;
 console.log(`Fetching roadmap data from ${apiUrl}`);
 
-interface RoadmapData {
-  dimensions?: { height?: number; width?: number };
-}
-
-let roadmapData: RoadmapData;
+let roadmapData: any;
 try {
   const response = await fetch(apiUrl);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   roadmapData = await response.json();
-} catch (error: unknown) {
-  console.error(`Failed to fetch roadmap data: ${error instanceof Error ? error.message : String(error)}`);
+} catch (error) {
+  console.error(`Failed to fetch roadmap data: ${error}`);
   process.exit(1);
 }
 

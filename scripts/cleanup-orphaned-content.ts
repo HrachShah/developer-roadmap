@@ -56,7 +56,8 @@ async function isEditorRoadmap(slug: string): Promise<boolean> {
     const raw = await fs.readFile(mdPath, 'utf-8');
     const { data } = matter(raw);
     return data.renderer === 'editor';
-  } catch {
+  } catch (err) {
+    console.error(`isEditorRoadmap: failed to read ${mdPath}:`, err);
     return false;
   }
 }

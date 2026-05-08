@@ -69,18 +69,13 @@ export async function readChatStream(
         const prefix = line.slice(0, separatorIndex);
         const content = line.slice(separatorIndex + 1);
 
-        try {
-          switch (prefix) {
-            case CHAT_RESPONSE_PREFIX.message:
-              return { type: 'message', content: JSON.parse(content) };
-            case CHAT_RESPONSE_PREFIX.details:
-              return { type: 'details', content: JSON.parse(content) };
-            default:
-              throw new Error('Invalid prefix: ' + prefix);
-          }
-        } catch (err) {
-          console.error('Failed to parse chat stream line:', content.slice(0, 100));
-          throw new Error('Invalid line: ' + line + '. JSON parse failed.');
+        switch (prefix) {
+          case CHAT_RESPONSE_PREFIX.message:
+            return { type: 'message', content: JSON.parse(content) };
+          case CHAT_RESPONSE_PREFIX.details:
+            return { type: 'details', content: JSON.parse(content) };
+          default:
+            throw new Error('Invalid prefix: ' + prefix);
         }
       });
 

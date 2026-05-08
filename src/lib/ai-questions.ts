@@ -17,12 +17,7 @@ export function getQuestionAnswerChatMessages(sessionId: string) {
     return [];
   }
 
-  try {
-    return JSON.parse(messages);
-  } catch (err) {
-    // Malformed JSON in storage, treat as empty
-    return [];
-  }
+  return JSON.parse(messages);
 }
 
 export function getLastMessagesSessionId() {
