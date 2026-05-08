@@ -102,7 +102,7 @@ export async function officialRoadmapDetails(roadmapSlug: string) {
     );
 
     return roadmap;
-  } catch (error) {
+  } catch (error: Error) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return null;
     }
@@ -118,7 +118,7 @@ export async function listOfficialRoadmaps() {
     );
 
     return roadmaps;
-  } catch (error) {
+  } catch (error: Error) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return [];
     }
@@ -134,7 +134,7 @@ export async function listOfficialBeginnerRoadmaps() {
     );
 
     return roadmaps;
-  } catch (error) {
+  } catch (error: Error) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return [];
     }

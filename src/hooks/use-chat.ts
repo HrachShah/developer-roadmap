@@ -103,7 +103,7 @@ export function useChat(options: UseChatOptions) {
         setStatus('idle');
         abortControllerRef.current = null;
         onFinish?.();
-      } catch (error) {
+      } catch (error: Error) {
         if (abortControllerRef.current?.signal.aborted) {
           // we don't want to show error if the user stops the chat
           // so we just return

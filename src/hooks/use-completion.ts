@@ -90,7 +90,7 @@ export function useCompletion<
         setCompletion(result);
 
         return result;
-      } catch (error) {
+      } catch (error: Error) {
         // we can ignore abort errors
         // as they are expected when the user cancels the request
         if (error instanceof Error && error.name === 'AbortError') {

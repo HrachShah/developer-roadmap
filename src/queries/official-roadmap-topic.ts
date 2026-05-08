@@ -54,7 +54,7 @@ export async function getOfficialRoadmapTopic(
     );
 
     return topic;
-  } catch (error) {
+  } catch (error: Error) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return null;
     }
