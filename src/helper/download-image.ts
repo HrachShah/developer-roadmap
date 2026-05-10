@@ -30,8 +30,9 @@ export async function downloadImage({
       a.download = `${name}.${extension}`;
       a.click();
     };
-  } catch (error) {
-    alert('Error downloading image');
+  } catch (error: unknown) {
+    console.error(error);
+    alert(`Error downloading image${error instanceof Error ? `: ${error.message}` : ''}`);
   }
 }
 
