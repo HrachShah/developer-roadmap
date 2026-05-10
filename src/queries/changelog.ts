@@ -27,7 +27,7 @@ export async function listChangelog(query: ListChangelogQuery = {}) {
     );
 
     return changelogs;
-  } catch (error) {
+  } catch (error: unknown) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return [];
     }

@@ -30,7 +30,7 @@ export function markdownToHtml(markdown: string, isInline = true): string {
     } else {
       return md.render(replacedMarkdown);
     }
-  } catch (e) {
+  } catch (e: unknown) {
     return markdown;
   }
 }
@@ -52,7 +52,7 @@ const markdownItAsync = MarkdownItAsync({
     const html = await codeToHtml(code, {
       lang: lang?.toLowerCase(),
       theme: 'dracula',
-    }).catch((e) => {
+    }).catch((e: unknown) => {
       console.warn(e);
       return code;
     });
@@ -89,7 +89,7 @@ export async function markdownToHtmlWithHighlighting(markdown: string) {
 
     return markdownItAsync.renderAsync(replaceVariables(markdown));
 
-  } catch (e) {
+  } catch (e: unknown) {
     return markdown;
   }
 }

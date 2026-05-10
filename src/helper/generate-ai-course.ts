@@ -146,7 +146,7 @@ export async function generateCourse(options: GenerateCourseOptions) {
         try {
           const aiCourse = generateAiCourseStructure(result);
           onCourseChange?.(aiCourse, result);
-        } catch (e) {
+        } catch (e: unknown) {
           console.error('Error parsing streamed course content:', e);
         }
       },

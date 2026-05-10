@@ -48,7 +48,7 @@ export async function officialProjectDetails(projectSlug: string) {
     );
 
     return project;
-  } catch (error) {
+  } catch (error: unknown) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return null;
     }
@@ -71,7 +71,7 @@ export async function listOfficialProjects(
     );
 
     return projects;
-  } catch (error) {
+  } catch (error: unknown) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return [];
     }

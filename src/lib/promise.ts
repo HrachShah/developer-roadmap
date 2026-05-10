@@ -23,7 +23,7 @@ export async function runPromisesInBatchSequentially<T>(
         if (promise instanceof Promise) {
           return promise
             .then((result) => results.push(result))
-            .catch((error) => {
+            .catch((error: unknown) => {
               if (!ignoreErrors) {
                 throw error;
               }
@@ -32,7 +32,7 @@ export async function runPromisesInBatchSequentially<T>(
         } else {
           return promise()
             .then((result) => results.push(result))
-            .catch((error) => {
+            .catch((error: unknown) => {
               if (!ignoreErrors) {
                 throw error;
               }
