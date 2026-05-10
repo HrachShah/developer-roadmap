@@ -252,9 +252,10 @@ export function useRoadmapAIChat(options: Options) {
       setIsStreamingMessage(false);
       setStreamedMessage(null);
       abortControllerRef.current = null;
-      if (!abortController?.signal.aborted) {
-        toast.error('Something went wrong');
+      if (abortController?.signal.aborted || (error instanceof Error && error.name === 'AbortError')) {
+        return;
       }
+      toast.error('Something went wrong');
     }
   };
 
