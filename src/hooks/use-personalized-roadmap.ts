@@ -98,7 +98,7 @@ export function  usePersonalizedRoadmap(options: UsePersonalizedRoadmapOptions) 
       }
 
       onFinish?.(contentRef.current);
-    } catch (error) {
+    } catch (error: unknown) {
       if (abortControllerRef.current?.signal.aborted) {
         // we don't want to show error if the user stops the chat
         // so we just return

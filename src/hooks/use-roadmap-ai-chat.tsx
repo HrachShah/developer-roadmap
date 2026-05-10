@@ -248,7 +248,7 @@ export function useRoadmapAIChat(options: Options) {
 
       setIsStreamingMessage(false);
       abortControllerRef.current = null;
-    } catch (error) {
+    } catch (error: unknown) {
       setIsStreamingMessage(false);
       setStreamedMessage(null);
       abortControllerRef.current = null;
