@@ -73,13 +73,13 @@ export async function readChatStream(
           case CHAT_RESPONSE_PREFIX.message:
             try {
               return { type: 'message', content: JSON.parse(content) };
-            } catch {
+            } catch (err: unknown) {
               throw new Error('Failed to parse message content: ' + content);
             }
           case CHAT_RESPONSE_PREFIX.details:
             try {
               return { type: 'details', content: JSON.parse(content) };
-            } catch {
+            } catch (err: unknown) {
               throw new Error('Failed to parse details content: ' + content);
             }
           default:
