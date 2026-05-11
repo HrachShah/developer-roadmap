@@ -88,7 +88,7 @@ export async function syncContentToDatabase(
 
   try {
     return JSON.parse(responseText);
-  } catch {
+  } catch (err: unknown) {
     throw new Error(
       `Failed to parse response as JSON: ${responseText.substring(0, 500)}`,
     );
