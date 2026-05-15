@@ -96,17 +96,18 @@ export class Renderer {
           this.resourceId,
         );
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         if (!this.containerEl) {
           return;
         }
 
+        const err = error instanceof Error ? error : new Error(String(error));
         const message = `
           <strong>There was an error.</strong><br>
-          
+
           Try loading the page again. or submit an issue on GitHub with following:<br><br>
 
-          ${error.message} <br /> ${error.stack}
+          ${err.message} <br /> ${err.stack}
         `;
         this.containerEl.innerHTML = `<div class="error py-5 text-center text-red-600 mx-auto">${message}</div>`;
       });
@@ -165,9 +166,9 @@ export class Renderer {
         renderTopicProgress(topicId, newStatus);
         refreshProgressCounters();
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         alert('Something went wrong, please try again.');
-        console.error(err);
+        console.error(err instanceof Error ? err : new Error(String(err)));
       })
       .finally(() => {
         pageProgressMessage.set('');
