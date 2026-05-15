@@ -31,7 +31,11 @@ export async function downloadImage({
       a.click();
     };
   } catch (error: unknown) {
-    alert('Error downloading image');
+    // fetch() raises TypeError on network failure or invalid URL;
+    // res.text() raises TypeError for non-text responses;
+    // btoa() raises TypeError for non-Latin1 characters
+    const message = error instanceof Error ? error.message : String(error);
+    alert(`Error downloading image${message ? `: ${message}` : ""}`);
   }
 }
 
