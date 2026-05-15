@@ -138,7 +138,7 @@ export function UpdateTeamResourceModal(props: ProgressMapProps) {
     }
 
     renderResource(resourceJsonUrl)
-      .catch((err) => {
+      .catch((err: unknown) => {
         console.error(err);
         toast.error('Something went wrong. Please try again!');
       })

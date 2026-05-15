@@ -51,8 +51,8 @@ export function FlowRoadmapRenderer(props: FlowRoadmapRendererProps) {
       .then(() => {
         renderTopicProgress(topicId, newStatus);
       })
-      .catch((err) => {
-        toast.error('Something went wrong, please try again.');
+      .catch((err: unknown) => {
+        toast.error(err?.message || 'Something went wrong, please try again.');
         console.error(err);
       })
       .finally(() => {

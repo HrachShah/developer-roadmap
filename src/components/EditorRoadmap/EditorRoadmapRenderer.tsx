@@ -85,7 +85,7 @@ export function EditorRoadmapRenderer(props: RoadmapRendererProps) {
       .then(() => {
         renderTopicProgress(topicId, newStatus);
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         toast.error('Something went wrong, please try again.');
         console.error(err);
       })
