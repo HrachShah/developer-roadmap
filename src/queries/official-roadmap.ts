@@ -102,7 +102,7 @@ export async function officialRoadmapDetails(roadmapSlug: string) {
     );
 
     return roadmap;
-  } catch (error) {
+  } catch (error: unknown) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return null;
     }
