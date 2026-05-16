@@ -75,7 +75,7 @@ export function api(context: APIContext) {
         response: undefined,
         error: {
           status: 0,
-          message: error.message,
+          message: (error as Error).message,
         },
       };
     }
