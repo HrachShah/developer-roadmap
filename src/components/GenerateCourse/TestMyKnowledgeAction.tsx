@@ -107,8 +107,8 @@ export function TestMyKnowledgeAction(props: TestMyKnowledgeActionProps) {
           setIsGenerating(false);
         },
       });
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Something went wrong');
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Something went wrong');
       setIsLoading(false);
       setIsGenerating(false);
     }
