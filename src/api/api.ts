@@ -70,12 +70,12 @@ export function api(context: APIContext) {
         response: undefined,
         error: data as ErrorType,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       return {
         response: undefined,
         error: {
           status: 0,
-          message: error.message,
+          message: error instanceof Error ? error.message : String(error),
         },
       };
     }
