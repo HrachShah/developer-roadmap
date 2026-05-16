@@ -322,8 +322,8 @@ export function GenerateRoadmap(props: GenerateRoadmapProps) {
     try {
       await downloadGeneratedRoadmapImage(roadmapTerm, node);
       pageProgressMessage.set('');
-    } catch (error) {
-      console.error(error);
+    } catch (error: unknown) {
+      console.error(error instanceof Error ? error.message : error);
       toast.error('Something went wrong');
     }
   };
