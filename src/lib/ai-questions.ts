@@ -16,8 +16,11 @@ export function getQuestionAnswerChatMessages(sessionId: string) {
   if (!messages) {
     return [];
   }
-
-  return JSON.parse(messages);
+  try {
+    return JSON.parse(messages);
+  } catch {
+    return [];
+  }
 }
 
 export function getLastMessagesSessionId() {
