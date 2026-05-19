@@ -82,9 +82,17 @@ export async function readDataStream<D extends Record<string, unknown>>(
 
         switch (prefix) {
           case CHAT_RESPONSE_PREFIX.message:
-            return { type: 'text', content: JSON.parse(content) };
+            try {
+              return { type: 'text', content: JSON.parse(content) };
+            } catch {
+              return { type: 'text', content };
+            }
           case CHAT_RESPONSE_PREFIX.details:
-            return { type: 'details', data: JSON.parse(content) };
+            try {
+              return { type: 'details', data: JSON.parse(content) };
+            } catch {
+              return { type: 'details', data: {} as D };
+            }
           default:
             throw new Error('Invalid prefix: ' + prefix);
         }
