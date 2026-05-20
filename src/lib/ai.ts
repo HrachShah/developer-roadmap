@@ -82,7 +82,11 @@ export function getCourseFineTuneData(
     return null;
   }
 
-  return JSON.parse(meta);
+  try {
+    return JSON.parse(meta);
+  } catch {
+    return null;
+  }
 }
 
 export function getLastSessionId(): string | null {
