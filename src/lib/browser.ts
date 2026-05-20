@@ -107,7 +107,11 @@ export function getStoredUtmParams(): UtmParams {
     return {};
   }
 
-  return JSON.parse(utmParams);
+  try {
+    return JSON.parse(utmParams);
+  } catch {
+    return {};
+  }
 }
 
 export function getUrlParams() {
