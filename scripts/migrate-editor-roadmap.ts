@@ -39,8 +39,14 @@ for (const roadmapId of editorRoadmapIds) {
   );
 
   const roadmapJSONRaw = await fs.readFile(roadmapJSONDir, 'utf-8');
-  const roadmapJSON = JSON.parse(roadmapJSONRaw);
-
+  let roadmapJSON;
+  try {
+    roadmapJSON = JSON.parse(roadmapJSONRaw);
+  } catch (err) {
+    throw new Error(
+      `Failed to parse roadmap JSON for ${roadmapId}: ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
   const roadmapNodes = roadmapJSON.nodes as Node[];
   const updatedNodes = roadmapNodes.map((node) => {
     const width = +(node?.width || node?.style?.width || 0);
