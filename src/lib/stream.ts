@@ -80,17 +80,23 @@ export async function readDataStream<D extends Record<string, unknown>>(
         const prefix = line.slice(0, separatorIndex);
         const content = line.slice(separatorIndex + 1);
 
-        switch (prefix) {
-          case CHAT_RESPONSE_PREFIX.message:
-            return { type: 'text', content: JSON.parse(content) };
-          case CHAT_RESPONSE_PREFIX.details:
-            return { type: 'details', data: JSON.parse(content) };
-          default:
-            throw new Error('Invalid prefix: ' + prefix);
+        try {
+          switch (prefix) {
+            case CHAT_RESPONSE_PREFIX.message:
+              return { type: 'text', content: JSON.parse(content) };
+            case CHAT_RESPONSE_PREFIX.details:
+              return { type: 'details', data: JSON.parse(content) };
+            default:
+              throw new Error('Invalid prefix: ' + prefix);
+          }
+        } catch (error: unknown) {
+          console.warn('Failed to parse stream line:', content, error);
+          return null;
         }
       });
 
     for (const part of streamParts) {
+      if (part === null) continue;
       await onData?.(part);
     }
   }
