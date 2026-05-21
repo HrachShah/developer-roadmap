@@ -75,7 +75,6 @@ export async function httpCall<ResponseType = AppResponse>(
       headers,
     });
 
-    // @ts-ignore
     const doesAcceptHtml = options?.headers?.['Accept'] === 'text/html';
 
     const data = doesAcceptHtml ? await response.text() : await response.json();
