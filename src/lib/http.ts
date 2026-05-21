@@ -53,7 +53,6 @@ export async function httpCall<
     });
     statusCode = response.status;
 
-    // @ts-ignore
     const doesAcceptHtml = options?.headers?.['Accept'] === 'text/html';
 
     const data = doesAcceptHtml ? await response.text() : await response.json();
