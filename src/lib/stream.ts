@@ -74,19 +74,27 @@ export async function readDataStream<D extends Record<string, unknown>>(
       .map((line) => {
         const separatorIndex = line.indexOf(':');
         if (separatorIndex === -1) {
-          throw new Error('Invalid line: ' + line + '. No separator found.');
+          console.warn('Invalid stream line: no separator found');
+          return null;
         }
 
         const prefix = line.slice(0, separatorIndex);
         const content = line.slice(separatorIndex + 1);
 
-        switch (prefix) {
-          case CHAT_RESPONSE_PREFIX.message:
-            return { type: 'text', content: JSON.parse(content) };
-          case CHAT_RESPONSE_PREFIX.details:
-            return { type: 'details', data: JSON.parse(content) };
-          default:
-            throw new Error('Invalid prefix: ' + prefix);
+        try {
+          switch (prefix) {
+            case CHAT_RESPONSE_PREFIX.message:
+              return { type: 'text' as const, content: JSON.parse(content) };
+            case CHAT_RESPONSE_PREFIX.details:
+              return { type: 'details' as const, data: JSON.parse(content) };
+            default:
+              console.warn('Unknown stream prefix:', prefix);
+              return null;
+          }
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : String(error);
+          console.warn('Failed to parse stream line:', content.slice(0, 100), message);
+          return null;
         }
       });
 
