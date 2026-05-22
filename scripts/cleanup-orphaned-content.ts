@@ -46,7 +46,11 @@ async function fetchRoadmapJson(slug: string): Promise<{ nodes: Node[] }> {
     console.log(`  API fetch failed for ${slug}, falling back to local JSON`);
     const localPath = path.join(ROADMAP_CONTENT_DIR, slug, `${slug}.json`);
     const raw = await fs.readFile(localPath, 'utf-8');
-    return JSON.parse(raw);
+    try {
+      return JSON.parse(raw);
+    } catch (err) {
+      throw new Error(`Local JSON for '${slug}' is malformed: ${(err as Error).message}`);
+    }
   }
 }
 
@@ -56,7 +60,8 @@ async function isEditorRoadmap(slug: string): Promise<boolean> {
     const raw = await fs.readFile(mdPath, 'utf-8');
     const { data } = matter(raw);
     return data.renderer === 'editor';
-  } catch {
+  } catch (err) {
+    // non-editor roadmaps don't have renderer frontmatter; this is expected
     return false;
   }
 }
