@@ -81,12 +81,12 @@ export async function httpCall<
       response: undefined,
       error: data as ErrorType,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       response: undefined,
       error: {
         status: statusCode,
-        message: error.message,
+        message: error instanceof Error ? error.message : String(error),
       },
     };
   }

@@ -160,8 +160,8 @@ export async function generateCourse(options: GenerateCourseOptions) {
         queryClient.invalidateQueries(aiLimitOptions());
       },
     });
-  } catch (error: any) {
-    onError?.(error?.message || 'Something went wrong');
+  } catch (error: unknown) {
+    onError?.(error instanceof Error ? error.message : 'Something went wrong');
     console.error('Error in course generation:', error);
     onLoadingChange?.(false);
   }
