@@ -177,11 +177,10 @@ export async function generateAIRoadmap(options: GenerateAIRoadmapOptions) {
       },
     });
     onFinish?.();
-  } catch (error: any) {
-    onError?.(error?.message || 'Something went wrong');
-    console.error('Error in course generation:', error);
+  } catch (error: unknown) {
+    onError?.(error instanceof Error ? error.message : 'Failed to generate roadmap');
+    console.error('Error in AI roadmap generation:', error);
     onLoadingChange?.(false);
-    onStreamingChange?.(false);
   }
 }
 
