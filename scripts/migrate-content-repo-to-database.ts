@@ -248,7 +248,7 @@ for (const roadmapId of editorRoadmapIds) {
     console.log(
       `✅ Synced ${topics.length} topics to database for ${roadmapId}`,
     );
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(error);
     process.exit(1);
   }
