@@ -20,7 +20,7 @@ try {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   roadmapData = await response.json();
-} catch (error) {
+} catch (error: unknown) {
   console.error(`Failed to fetch roadmap data: ${error}`);
   process.exit(1);
 }

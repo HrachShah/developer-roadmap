@@ -25,7 +25,7 @@ const promises = roadmapIds.map(roadmapId => {
       });
       console.log(`✓ Completed: ${roadmapId}`);
       resolve(roadmapId);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`✗ Failed: ${roadmapId}`, error);
       reject(error);
     }
