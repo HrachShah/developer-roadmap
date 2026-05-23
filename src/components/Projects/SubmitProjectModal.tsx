@@ -202,9 +202,9 @@ export function SubmitProjectModal(props: SubmitProjectModalProps) {
       setIsLoading(false);
 
       onSubmit(submitResponse);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      setError(error?.message || 'Failed to verify repository');
+      setError(error instanceof Error ? error.message : 'Failed to verify repository');
       setIsLoading(false);
     }
   };

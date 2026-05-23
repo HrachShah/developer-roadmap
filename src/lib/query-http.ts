@@ -109,8 +109,8 @@ export async function httpCall<ResponseType = AppResponse>(
     }
 
     return data as ResponseType;
-  } catch (error: any) {
-    throw error;
+  } catch (error: unknown) {
+    throw error instanceof Error ? error : new Error(String(error));
   }
 }
 

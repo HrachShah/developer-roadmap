@@ -125,11 +125,10 @@ export async function generateAIQuiz(options: GenerateAIQuizOptions) {
       },
     });
     onFinish?.();
-  } catch (error: any) {
-    onError?.(error?.message || 'Something went wrong');
+  } catch (error: unknown) {
+    onError?.(error instanceof Error ? error.message : 'Failed to generate quiz');
     console.error('Error in quiz generation:', error);
     onLoadingChange?.(false);
-    onStreamingChange?.(false);
   }
 }
 

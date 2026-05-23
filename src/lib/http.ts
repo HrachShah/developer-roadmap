@@ -81,14 +81,8 @@ export async function httpCall<
       response: undefined,
       error: data as ErrorType,
     };
-  } catch (error: any) {
-    return {
-      response: undefined,
-      error: {
-        status: statusCode,
-        message: error.message,
-      },
-    };
+  } catch (error: unknown) {
+    throw error instanceof Error ? error : new Error(String(error));
   }
 }
 
