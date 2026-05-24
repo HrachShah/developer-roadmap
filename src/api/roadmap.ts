@@ -49,12 +49,22 @@ export async function getProjectList() {
   const baseUrl = import.meta.env.DEV
     ? 'http://localhost:3000'
     : 'https://roadmap.sh';
-  const pages = await fetch(`${baseUrl}/pages.json`).catch((err) => {
-    console.error(err);
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}/pages.json`);
+  } catch (err) {
+    console.error('[roadmap] failed to fetch project list:', err);
     return [];
-  });
+  }
 
-  const pagesJson = await (pages as any).json();
+  let pagesJson: any[];
+  try {
+    pagesJson = await response.json();
+  } catch (err) {
+    console.error('[roadmap] failed to parse pages.json:', err);
+    return [];
+  }
+
   const projects: ProjectPageType[] = pagesJson
     .filter((page: any) => page?.group?.toLowerCase() === 'projects')
     .map((page: any) => ({
