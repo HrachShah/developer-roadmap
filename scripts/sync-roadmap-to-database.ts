@@ -76,7 +76,7 @@ try {
     },
   );
   console.log(`✅ Successfully synced roadmap "${roadmapSlug}" to database`);
-} catch (error) {
+} catch (error: unknown) {
   console.error(`❌ Failed to sync roadmap "${roadmapSlug}" to database`);
   process.exit(1);
 }

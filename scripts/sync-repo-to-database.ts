@@ -247,7 +247,7 @@ try {
   console.log(`📤 Syncing ${topics.length} topics to database...`);
   await syncContentToDatabase(topics);
   console.log(`✅ Successfully synced ${topics.length} topics`);
-} catch (error) {
+} catch (error: unknown) {
   console.error('❌ Sync failed with error:');
   console.error(error);
   if (error instanceof Error) {
