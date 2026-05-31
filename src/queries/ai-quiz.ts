@@ -125,7 +125,7 @@ export async function generateAIQuiz(options: GenerateAIQuizOptions) {
       },
     });
     onFinish?.();
-  } catch (error: any) {
+  } catch (error: unknown) {
     onError?.(error?.message || 'Something went wrong');
     console.error('Error in quiz generation:', error);
     onLoadingChange?.(false);

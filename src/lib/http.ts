@@ -81,7 +81,7 @@ export async function httpCall<
       response: undefined,
       error: data as ErrorType,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       response: undefined,
       error: {

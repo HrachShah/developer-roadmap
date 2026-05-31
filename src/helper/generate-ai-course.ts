@@ -146,7 +146,7 @@ export async function generateCourse(options: GenerateCourseOptions) {
         try {
           const aiCourse = generateAiCourseStructure(result);
           onCourseChange?.(aiCourse, result);
-        } catch (e) {
+        } catch (e: unknown) {
           console.error('Error parsing streamed course content:', e);
         }
       },
@@ -160,7 +160,7 @@ export async function generateCourse(options: GenerateCourseOptions) {
         queryClient.invalidateQueries(aiLimitOptions());
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     onError?.(error?.message || 'Something went wrong');
     console.error('Error in course generation:', error);
     onLoadingChange?.(false);

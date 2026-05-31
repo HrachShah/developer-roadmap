@@ -230,7 +230,7 @@ export function AICourseLesson(props: AICourseLessonProps) {
           setIsGenerating(false);
         },
       });
-    } catch (e) {
+    } catch (e: unknown) {
       setError(e instanceof Error ? e.message : 'Something went wrong');
       setIsLoading(false);
     }
