@@ -148,7 +148,7 @@ export function AICourseRoadmapView(props: AICourseRoadmapViewProps) {
           }
         },
       });
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error generating course roadmap:', error);
       setError('Something went wrong');
       setIsGenerating(false);

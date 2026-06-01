@@ -34,7 +34,7 @@ export function useCustomRoadmap(options: UseCustomRoadmapOptions) {
           }
 
           return await httpGet<GetRoadmapResponse>(roadmapUrl.toString());
-        } catch (error) {
+        } catch (error: unknown) {
           if (error instanceof SyntaxError) {
             throw new FetchError(404, 'Roadmap not found');
           }
