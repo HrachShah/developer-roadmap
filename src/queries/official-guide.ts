@@ -94,7 +94,7 @@ export async function getOfficialGuide(slug: string, roadmapId?: string) {
     );
 
     return guide;
-  } catch (error) {
+  } catch (error: unknown) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return null;
     }
@@ -110,7 +110,7 @@ export async function listOfficialAuthors() {
     );
 
     return authors;
-  } catch (error) {
+  } catch (error: unknown) {
     if (FetchError.isFetchError(error) && error.status === 404) {
       return [];
     }
