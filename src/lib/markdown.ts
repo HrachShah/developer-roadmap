@@ -30,7 +30,7 @@ export function markdownToHtml(markdown: string, isInline = true): string {
     } else {
       return md.render(replacedMarkdown);
     }
-  } catch (e) {
+  } catch (e: unknown) {
     return markdown;
   }
 }
@@ -89,7 +89,7 @@ export async function markdownToHtmlWithHighlighting(markdown: string) {
 
     return markdownItAsync.renderAsync(replaceVariables(markdown));
 
-  } catch (e) {
+  } catch (e: unknown) {
     return markdown;
   }
 }
