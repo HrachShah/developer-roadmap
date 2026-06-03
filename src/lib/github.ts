@@ -17,7 +17,7 @@ export async function countStars(
     const json = await repoData.json();
 
     starCount = json.stargazers_count * 1 || defaultStarCount;
-  } catch (e) {
+  } catch (e: unknown) {
     console.log('Failed to fetch stars', e);
     starCount = defaultStarCount;
   }
@@ -52,7 +52,7 @@ export async function getRepositoryRank(
         ranking = `${rank}${getOrdinalSuffix(rank)}`;
       }
     }
-  } catch (e) {
+  } catch (e: unknown) {
     console.log('Failed to fetch ranking');
     ranking = defaultRanking;
   }

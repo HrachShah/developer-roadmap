@@ -39,7 +39,7 @@ export async function getDiscordInfo(): Promise<{
       online: json.approximate_presence_count,
       onlineFormatted: formatter.format(json.approximate_presence_count),
     };
-  } catch (e) {
+  } catch (e: unknown) {
     discordStats = {
       url: `https://roadmap.sh/discord`,
       total: 17000,
