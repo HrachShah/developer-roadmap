@@ -177,7 +177,7 @@ export async function generateAIRoadmap(options: GenerateAIRoadmapOptions) {
       },
     });
     onFinish?.();
-  } catch (error: any) {
+  } catch (error: unknown) {
     onError?.(error?.message || 'Something went wrong');
     console.error('Error in course generation:', error);
     onLoadingChange?.(false);

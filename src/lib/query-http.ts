@@ -109,7 +109,7 @@ export async function httpCall<ResponseType = AppResponse>(
     }
 
     return data as ResponseType;
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw error;
   }
 }
